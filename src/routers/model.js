@@ -15,7 +15,7 @@ router.post('/models', auth, async (req, res) => {
         res.status(400).send(error)
     }
 })
-router.get('./models', async (req, res) => {
+router.get('/models', async (req, res) => {
     const models = await Model.find()
     
     res.send(models)
