@@ -1,0 +1,8 @@
+header {
+    margin-top: 16px;
+    margin-bottom: 48px;
+}
+
+.main-content {
+    flex-grow: 1;
+}
