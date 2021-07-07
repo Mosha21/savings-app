@@ -8,7 +8,6 @@ module.exports = (passport) => {
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         secretOrKey: process.env.JWT_SECRET
     }, (jwtPayload, done) => {
-        console.log(jwtPayload)
         try {
             User.findOne({ _id: jwtPayload._id }).then(user => {
                 if (user) {

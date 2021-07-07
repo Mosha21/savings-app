@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
 
 //userSchema.virtual()
 
-userSchema.methods.toJSON = function () {
+userSchema.methods.toJSON = function () { // Modifies response
     const user = this
     const userObject = user.toObject()
 
