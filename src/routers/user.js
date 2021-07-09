@@ -31,4 +31,21 @@ router.get('/users/me', passport.authenticate('jwt', { session: false }), async 
     res.status(200).json({ user: req.user })
 })
 
+router.patch('users/me', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    const allowedUpdates = ['name', 'email', 'password']
+    const updates = Object.keys(req.body)
+    const isValidUpdate = updates.every(update => allowedUpdates.includes(update))
+
+    if(!isValidUpdate) res.status(400).send({ error: 'Invalid update!' })
+
+    try {
+        updates.forEach(update => req.user[update] = req.body[update])
+
+        await req.user.save()
+        res.send(req.user)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
 module.exports = router
