@@ -31,7 +31,7 @@ router.get('/users/me', passport.authenticate('jwt', { session: false }), async 
     res.status(200).json({ user: req.user })
 })
 
-router.patch('users/me', passport.authenticate('jwt', { session: false }), async (req, res) => {
+router.patch('/users/me', passport.authenticate('jwt', { session: false }), async (req, res) => {
     const allowedUpdates = ['name', 'email', 'password']
     const updates = Object.keys(req.body)
     const isValidUpdate = updates.every(update => allowedUpdates.includes(update))
