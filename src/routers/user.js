@@ -48,4 +48,14 @@ router.patch('/users/me', passport.authenticate('jwt', { session: false }), asyn
     }
 })
 
+router.delete('/users/me', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    try {
+        await req.user.remove()
+
+        res.send(req.user)
+    } catch (error) {
+        res.status(500).send(error)
+    }
+})
+
 module.exports = router
